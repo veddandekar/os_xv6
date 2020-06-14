@@ -89,3 +89,35 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+int
+sys_halt(void)
+{
+  outw(0x604, 0x2000); // Write value 0x2000 to port 0x604
+  return 0;
+}
+
+int
+sys_reboot(void)
+{
+  // Logic to reset all registers
+    uint good = 0x02;
+    while (good & 0x02)
+        good = inb(0x64);
+  // Logic to initize reboot
+    outb(0x64, 0xFE);
+    outb(0xf4, 0x00);
+    return 0;
+}
+
+int sys_square(void)  {
+  int num;
+  argptr(0, (void *)&num, sizeof(num)); // Get argument
+  return num * num;
+}
+
+int 
+sys_getmysize(void)
+{
+   return myproc()->sz; // Use myproc(struct that stores processes) to get address size
+}

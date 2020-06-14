@@ -103,6 +103,11 @@ extern int sys_unlink(void);
 extern int sys_wait(void);
 extern int sys_write(void);
 extern int sys_uptime(void);
+extern int sys_reboot(void);
+extern int sys_halt(void);
+extern int sys_square(void);
+extern int sys_getmysize(void);
+
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -126,6 +131,10 @@ static int (*syscalls[])(void) = {
 [SYS_link]    sys_link,
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
+[SYS_reboot]   sys_reboot,
+[SYS_halt]   sys_halt,
+[SYS_square]   sys_square,
+[SYS_getmysize]   sys_getmysize,
 };
 
 void
